@@ -1,13 +1,14 @@
 /*
 
-  Authors (group members):
-  Email addresses of group members:
-  Group name:
+  Authors (group members): Ryan Bomalaski
+  Email addresses of group members: rbomalaski2015@my.fit.edu
+  Group name: 4C
 
-  Course:
-  Section:
+  Course: CSE 2010
+  Section: 4
 
   Description of the overall algorithm:
+      PSEUDOCODE WILL GO HERE
 
 
 */
