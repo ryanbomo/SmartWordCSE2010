@@ -39,6 +39,41 @@ public class SmartWord {
         Once the Trie is built, the processOldMessages will bring in the new
         words to modify the weight.
          */
+        String lineBreak = System.getProperty("line.separator");
+        String[] eachWord = wordFile.split(lineBreak);
+        int weight = 0;
+        for(String w: eachWord){
+            w = w.toLowerCase();
+            /*
+            Add w to Trie with weight 1
+                This weight is added to each letter in the word at the correct position
+            Example:
+                w = "dips"
+                trie =                  d,1
+                                       /    \
+                                      i,1    r,1
+                                     /   \     \
+                                    p,1   r,1   [leaf,1]
+                                   /       \
+                               [leaf,1]     t,1
+                                             \
+                                             [leaf,1]
+                trie.add(w,weight)
+                trie =                  d,2
+                                       /    \
+                                      i,2    r,1
+                                     /   \    \
+                                    p,2   r,1   [leaf,1]
+                                   / \      \
+                           [leaf,1]   s,1    t,1
+                                      /         \
+                                 [leaf,1]      [leaf,1]
+            leaf for each will hold actual frequency for that word
+            each letter holds the frequency of that letter in that order
+            this allows for guesses to be shorter words
+            */
+            
+        }
 
     }
 
@@ -46,6 +81,14 @@ public class SmartWord {
     public void processOldMessages(String oldMessageFile) {
         String lineBreak = System.getProperty("line.separator");
         String[] individualLines = oldMessageFile.split(lineBreak);
+        /*
+            Check for Numbers in Word
+                If Num:
+                    Ignore Word
+                Else:
+                    Add to Trie
+        */
+        
 
     }
 
