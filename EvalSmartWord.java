@@ -1,3 +1,5 @@
+package SmartWord;
+
 import java.io.File;
 import java.util.Scanner;
 import java.io.IOException;
@@ -45,6 +47,7 @@ import java.lang.management.*;
 
 	 * overall score--accuracy/sqrt(time * memory)  
  */
+
 
 public class EvalSmartWord
 {
