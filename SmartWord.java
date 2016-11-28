@@ -51,7 +51,7 @@ public class SmartWord {
                 w = "dips"
                 trie =                  d,1
                                        /    \
-                                      i,1    r,1
+                                      i,1    o,1
                                      /   \     \
                                     p,1   r,1   [leaf,1]
                                    /       \
@@ -61,7 +61,7 @@ public class SmartWord {
                 trie.add(w,weight)
                 trie =                  d,2
                                        /    \
-                                      i,2    r,1
+                                      i,2    o,1
                                      /   \    \
                                     p,2   r,1   [leaf,1]
                                    / \      \
