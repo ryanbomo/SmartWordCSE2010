@@ -18,9 +18,10 @@ public class Trie {
     // each time a word is inserted, whether it's new or not, we add one to the
     // weight of the last letter of the word.
     public void insert(String word){
+        String lowerWord = word.toLowerCase();
         HashMap<Character, TrieNode> children = root.children;
-        for(int i = 0; i<word.length();i++){
-            char c = word.charAt(i);
+        for(int i = 0; i<lowerWord.length();i++){
+            char c = lowerWord.charAt(i);
             
             TrieNode t;
             if(children.containsKey(c)){
@@ -32,9 +33,9 @@ public class Trie {
             
             children = t.children;
             
-            if(i==word.length()-1){
+            if(i==lowerWord.length()-1){
                 t.weight++;
-                t.word = word;
+                t.word = lowerWord;
             }
         }
     }

@@ -1,27 +1,27 @@
 /*
-            Add w to Trie with weight 1
-                This weight is added to each letter in the word at the correct position
-            Example:
+
+	Inserting word w to our trie:
+
                 w = "dips"
-                trie =                  d,1
+                trie =                  d,0
                                        /    \
-                                      i,1    o,1
-                                     /   \     \
-                                    p,1   r,1   [leaf,1]
-                                   /       \
-                               [leaf,1]     t,1
-                                             \
-                                             [leaf,1]
-                trie.add(w,weight)
-                trie =                  d,2
+                                      i,0    o,1,"do"
+                                     /   \    
+                               p,1"dip"   r,0           
+                                           \
+                                            t,1,"dirt"
+                                              
+                                                     
+                trie.insert(w)
+                trie =                  d,0
                                        /    \
-                                      i,2    o,1
-                                     /   \    \
-                                    p,2   r,1   [leaf,1]
-                                   / \      \
-                           [leaf,1]   s,1    t,1
-                                      /         \
-                                 [leaf,1]      [leaf,1]
+                                      i,0    o,1,"do"
+                                     /   \     
+                              p,1,"dip"   r,0           
+                                     \      \
+                               s,1,"dips"    t,1,"dirt"
+                                                 
+                                                       
             leaf for each will hold actual frequency for that word
             each letter holds the frequency of that letter in that order
             this allows for guesses to be shorter words

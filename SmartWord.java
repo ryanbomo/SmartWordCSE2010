@@ -29,50 +29,18 @@ package SmartWord;
 public class SmartWord {
 
     String[] guesses = new String[3];  // 3 guesses from SmartWord
+    Trie wordBank = new Trie();
 
     // initialize SmartWord with a file of English words
     public SmartWord(String wordFile) {
         /*
         Initialize Trie using word list argument
-        Initial weight for everything in trie should be 1
-            This allows things to be a valid guess from the beginning
-        Once the Trie is built, the processOldMessages will bring in the new
-        words to modify the weight.
          */
         String lineBreak = System.getProperty("line.separator");
         String[] eachWord = wordFile.split(lineBreak);
-        int weight = 1;
         for(String w: eachWord){
             w = w.toLowerCase();
-            /*
-            Add w to Trie with weight 1
-                This weight is added to each letter in the word at the correct position
-            Example:
-                w = "dips"
-                trie =                  d,1
-                                       /    \
-                                      i,1    o,1
-                                     /   \     \
-                                    p,1   r,1   [leaf,1]
-                                   /       \
-                               [leaf,1]     t,1
-                                             \
-                                             [leaf,1]
-                trie.add(w,weight)
-                trie =                  d,2
-                                       /    \
-                                      i,2    o,1
-                                     /   \    \
-                                    p,2   r,1   [leaf,1]
-                                   / \      \
-                           [leaf,1]   s,1    t,1
-                                      /         \
-                                 [leaf,1]      [leaf,1]
-            leaf for each will hold actual frequency for that word
-            each letter holds the frequency of that letter in that order
-            this allows for guesses to be shorter words
-            */
-            
+            wordBank.insert(w);
         }
 
     }
@@ -81,15 +49,34 @@ public class SmartWord {
     public void processOldMessages(String oldMessageFile) {
         String lineBreak = System.getProperty("line.separator");
         String[] individualLines = oldMessageFile.split(lineBreak);
-        /*
-            Check for Numbers in Word
-                If Num:
-                    Ignore Word
-                Else:
-                    Add to Trie
-        */
-        
-
+        // iterate over each line from the input
+        for(int i = 0; i<individualLines.length;i++){
+            String[] words = individualLines[i].split(" ");
+            
+            // iterate over each word on the line
+            // we will check to make sure the whole word is letters
+            // if it's not, isWord becomes false and we don't worry about the word
+            for(int j = 0; j<words.length;j++){
+                boolean isWord = true;
+                
+                // iterate over each character in the word
+                // if a character is not a letter, ignore the whole word
+                for(int k = 0; k<words[j].length();k++){
+                    char thisChar = words[j].charAt(k);
+                    boolean letter = Character.isLetter(thisChar);
+                    if(!letter){
+                        isWord = false;
+                    }
+                }
+                
+                // if the word has only letters, we insert it into the trie
+                // If the word is already in the trie, it'll increase the weight
+                // if not, it'll add it with a weight of 1
+                if(isWord){
+                    wordBank.insert(words[j]);
+                }
+            }
+        }
     }
 
     // based on a letter typed in by the user, return 3 word guesses in an array
