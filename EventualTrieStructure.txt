@@ -1,0 +1,28 @@
+/*
+            Add w to Trie with weight 1
+                This weight is added to each letter in the word at the correct position
+            Example:
+                w = "dips"
+                trie =                  d,1
+                                       /    \
+                                      i,1    o,1
+                                     /   \     \
+                                    p,1   r,1   [leaf,1]
+                                   /       \
+                               [leaf,1]     t,1
+                                             \
+                                             [leaf,1]
+                trie.add(w,weight)
+                trie =                  d,2
+                                       /    \
+                                      i,2    o,1
+                                     /   \    \
+                                    p,2   r,1   [leaf,1]
+                                   / \      \
+                           [leaf,1]   s,1    t,1
+                                      /         \
+                                 [leaf,1]      [leaf,1]
+            leaf for each will hold actual frequency for that word
+            each letter holds the frequency of that letter in that order
+            this allows for guesses to be shorter words
+            */

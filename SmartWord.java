@@ -41,7 +41,7 @@ public class SmartWord {
          */
         String lineBreak = System.getProperty("line.separator");
         String[] eachWord = wordFile.split(lineBreak);
-        int weight = 0;
+        int weight = 1;
         for(String w: eachWord){
             w = w.toLowerCase();
             /*
