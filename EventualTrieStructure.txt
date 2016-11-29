@@ -22,7 +22,5 @@
                                s,1,"dips"    t,1,"dirt"
                                                  
                                                        
-            leaf for each will hold actual frequency for that word
-            each letter holds the frequency of that letter in that order
-            this allows for guesses to be shorter words
+            last letter for each will hold actual frequency for that word and the word
             */
