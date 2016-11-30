@@ -34,11 +34,12 @@ Our initial goal is to turn in a functional product.  Timing and space are irrel
     a. 
 
 4. Evaluate our accuracy
-	-If accurate, increment weight of word by 1
 
-       	-If Inaccurate but target is in trie, increment weight of correct word by 1
+    -If accurate, increment weight of word by 1
 
-       	-If Inaccurate but target is not in trie, add to trie and set weight to 1
+    -If Inaccurate but target is in trie, increment weight of correct word by 1
+
+    -If Inaccurate but target is not in trie, add to trie and set weight to 1
 
 ## Implementation
 
