@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class TrieNode {
     // character of the trie
-    char c;
+    char letter;
     
     // HashMap containing children
     HashMap<Character, TrieNode> children = new HashMap<Character, TrieNode>();
@@ -22,7 +22,7 @@ public class TrieNode {
     }
     
     public TrieNode(char c){
-        this.c = c;
+        this.letter = c;
     }
     
     public boolean hasChildren(){

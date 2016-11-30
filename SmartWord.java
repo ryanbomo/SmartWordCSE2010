@@ -1,9 +1,7 @@
 /*
-
   Authors (group members): Ryan Bomalaski
   Email addresses of group members: rbomalaski2015@my.fit.edu
   Group name: 4C
-
   Course: CSE 2010
   Section: 4
 
@@ -17,6 +15,9 @@
 2. Process the old messages by chopping the file into lines, and then the lines
     into words. [Done in processOldMessages]
     a.  check to make sure each word is valid
+        -If the word has ANY non-alphabet characters, the word is ignored.
+        -Currently an issue of ignoring the last word of a sentence, due to
+         punctuation.
     b. each valid word is inserted
         - On insertion, if it's not in the trie, it is added
         - If it is in the trie, then the weight is incremented by 1
@@ -37,8 +38,16 @@ Sources:
     2. Our Text Book/Code from Author
         -Used for Adapatable Priority Heap imlementation
         -Default Comparator was slightly modified to prefer high value over low
-    3.
+    3. https://github.com/ryanbomo/SmartWordCSE2010
+        -Used my personal github for version control with gropu
+        -I'm worried that other groups may have copied, as this isn't private
+        -If I could do this all over again, I wouldn't have done this, as
+         my group didn't actually do anything, so they didn't need the access...
 
+Potential Improvements:
+    - Fix issue in oldMessageProcessing that ignores any word with punctuatoin
+      at the end
+    - Fix priority heap implementation so that words with the same weight can exist
  */
 package SmartWord;
 
