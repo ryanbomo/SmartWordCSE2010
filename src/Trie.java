@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Trie {
     private TrieNode root;
-    HeapAdaptablePriorityQueue wordRankings;
+    HeapPriorityQueue wordRankings;
     
     public Trie(){
         root = new TrieNode();
@@ -85,7 +85,7 @@ public class Trie {
         }
         
         // This creates a new priority heap
-        wordRankings = new HeapAdaptablePriorityQueue();
+        wordRankings = new HeapPriorityQueue();
         
         // recursively search through the trie to build the heap
         recursiveHeapBuild(t);
