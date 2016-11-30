@@ -73,15 +73,14 @@ public class SmartWord {
         File dumby = new File("");
         String filePath = dumby.getAbsolutePath() + "/";
         dumby.delete();
-        filePath = filePath + wordFile;
-        String wordsFullText = new String(Files.readAllBytes(Paths.get(filePath)));
+        String filePathLib = filePath + wordFile;
+        String wordsFullText = new String(Files.readAllBytes(Paths.get(filePathLib)));
         String lineBreak = System.getProperty("line.separator");
         String[] eachWord = wordsFullText.split(lineBreak);
-        for(String w: eachWord){
+        for (String w : eachWord) {
             w = w.toLowerCase();
-            wordBank.insert(w);
+            wordBank.insert(w, 10);
         }
-
     }
 
     // process old messages from oldMessageFile
@@ -89,39 +88,75 @@ public class SmartWord {
         File dumby = new File("");
         String filePath = dumby.getAbsolutePath() + "/";
         dumby.delete();
-        filePath = filePath + oldMessageFile;
-        
-        String newFullText = new String(Files.readAllBytes(Paths.get(filePath)));
+        String oldFilePath = filePath + oldMessageFile;
+
+        String newFullText = new String(Files.readAllBytes(Paths.get(oldFilePath)));
         String lineBreak = System.getProperty("line.separator");
-        String[] individualLines  = newFullText.split(lineBreak);
+        String[] individualLines = newFullText.split(lineBreak);
         // iterate over each line from the input
-        for(int i = 0; i<individualLines.length;i++){
+        for (int i = 0; i < individualLines.length; i++) {
             String[] words = individualLines[i].split(" ");
-            
+
             // iterate over each word on the line
             // we will check to make sure the whole word is letters
             // if it's not, isWord becomes false and we don't worry about the word
-            for(int j = 0; j<words.length;j++){
+            for (int j = 0; j < words.length; j++) {
                 boolean isWord = true;
-                
+
                 // iterate over each character in the word
                 // if a character is not a letter, ignore the whole word
-                for(int k = 0; k<words[j].length();k++){
+                for (int k = 0; k < words[j].length(); k++) {
                     char thisChar = words[j].charAt(k);
                     boolean letter = Character.isLetter(thisChar);
-                    if(!letter){
+                    if (!letter) {
                         isWord = false;
                     }
                 }
-                
+
                 // if the word has only letters, we insert it into the trie
                 // If the word is already in the trie, it'll increase the weight
                 // if not, it'll add it with a weight of 1
-                if(isWord){
-                    wordBank.insert(words[j]);
+                if (isWord) {
+                    wordBank.insert(words[j], 10);
                 }
             }
         }
+//        String libFilePath = filePath + "en_US_TWIT.txt";
+//
+//        String libFullText = new String(Files.readAllBytes(Paths.get(libFilePath)));
+//        String[] individualLibLines = libFullText.split(lineBreak);
+//
+//        int iterator = 0;
+//        while (iterator < 1) {
+//            for (int i = 0; i < individualLibLines.length; i++) {
+//                String[] words = individualLibLines[i].split(" ");
+//
+//                // iterate over each word on the line
+//                // we will check to make sure the whole word is letters
+//                // if it's not, isWord becomes false and we don't worry about the word
+//                for (int j = 0; j < words.length; j++) {
+//                    boolean isWord = true;
+//
+//                    // iterate over each character in the word
+//                    // if a character is not a letter, ignore the whole word
+//                    for (int k = 0; k < words[j].length(); k++) {
+//                        char thisChar = words[j].charAt(k);
+//                        boolean letter = Character.isLetter(thisChar);
+//                        if (!letter) {
+//                            isWord = false;
+//                        }
+//                    }
+//
+//                    // if the word has only letters, we insert it into the trie
+//                    // If the word is already in the trie, it'll increase the weight
+//                    // if not, it'll add it with a weight of 1
+//                    if (isWord) {
+//                        wordBank.insert(words[j],1);
+//                    }
+//                }
+//            }
+//            iterator++;
+//        }
     }
 
     // based on a letter typed in by the user, return 3 word guesses in an array
@@ -131,13 +166,13 @@ public class SmartWord {
     public String[] guess(char letter, int letterPosition, int wordPosition) {
         // make sure we are still on the same word
         // if not, get stuff ready for new word
-        if(wordPosition != currentWordPos){
+        if (wordPosition != currentWordPos) {
             currentWordPos = wordPosition;
             currentWord = Character.toString(letter);
-        }else{
+        } else {
             currentWord = currentWord + letter;
         }
-        String[] guesses = wordBank.returnLikely(currentWord);
+        guesses = wordBank.returnLikely(currentWord);
         return guesses;
     }
 
@@ -155,12 +190,15 @@ public class SmartWord {
     // b.         false               null
     // c.         false               correct word
     public void feedback(boolean isCorrectGuess, String correctWord) {
-        if(isCorrectGuess){
-            wordBank.insert(correctWord);
-        }else if(!isCorrectGuess && correctWord != null){
-            wordBank.insert(correctWord);
+        if (isCorrectGuess) {
+            wordBank.insert(correctWord, 4);
+            //System.out.println(isCorrectGuess);
+            //System.out.println("Correct Guess and Correct Word is: "+correctWord);
+        } else if (!isCorrectGuess && correctWord != null) {
+            wordBank.insert(correctWord, 4);
+            //System.out.println(isCorrectGuess);
+            //System.out.println("Finished Typing and Correct Word is: "+correctWord);
         }
 
     }
-
 }

@@ -18,7 +18,7 @@ public class Trie {
     // a word is a leaf, but rather just attach usage data to the last letter,
     // each time a word is inserted, whether it's new or not, we add one to the
     // weight of the last letter of the word.
-    public void insert(String word){
+    public void insert(String word, int weightMod){
         // convert to lower and set pointer to root
         String lowerWord = word.toLowerCase();
         HashMap<Character, TrieNode> children = root.children;
@@ -43,7 +43,7 @@ public class Trie {
             // this allows our insertion method to also be used to iterate word
             // weight.
             if(i==lowerWord.length()-1){
-                t.weight++;
+                t.weight = t.weight + weightMod;
                 t.word = lowerWord;
             }
         }
@@ -134,6 +134,4 @@ public class Trie {
         // the class variable is cleared for each prefix search
         // not the cleanest way to do this, but it's easy   
     }
-    
-    
 }
