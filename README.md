@@ -98,7 +98,8 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
 
 ![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_1.png?raw=true)
 
-- Insert can now use variable weights for inserting a word
+####Insert can now use variable weights for inserting a word
+
   - New Hilary results:
 
 ![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_hilary_2.png?raw=true)
