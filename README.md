@@ -7,10 +7,14 @@ This is the README.md for our CSE2010 Group Project.
 Our initial goal is to turn in a functional product.  Timing and space are irrelevant to our goal of delivery.
 
 ## Design
+
 	 Description of the overall algorithm:
 1. Grab word list and build trie from the word list [Done in SmartWord]
+
     a. These words are then inserted into the Trie
+
     b. General structure for trie is used, but instead of worrying about leaves,
+
         the last letter of each word is given the word weight and the word string.
         This allows the ends of words to be seen logically, but saves space in not
         needing blank nodes at the end of the trie.
