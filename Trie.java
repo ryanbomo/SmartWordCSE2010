@@ -19,24 +19,29 @@ public class Trie {
     // each time a word is inserted, whether it's new or not, we add one to the
     // weight of the last letter of the word.
     public void insert(String word){
+        // convert to lower and set pointer to root
         String lowerWord = word.toLowerCase();
         HashMap<Character, TrieNode> children = root.children;
+        // for each letter in the word, travel down from the root
         for(int i = 0; i<lowerWord.length();i++){
             char c = lowerWord.charAt(i);
-            
             TrieNode t;
+            // if the children have the node, go to it
             if(children.containsKey(c)){
                 t = children.get(c);
             }else{
+            // if the children don't have the node, create it
                 t = new TrieNode(c);
                 children.put(c,t);
             }
-            
+            // point to children
             children = t.children;
             
             // Once you get to the end of the word
             // add the weight to the node of the last letter
             // this marks unique words and allows us to quickly get the weight
+            // this allows our insertion method to also be used to iterate word
+            // weight.
             if(i==lowerWord.length()-1){
                 t.weight++;
                 t.word = lowerWord;
@@ -51,7 +56,6 @@ public class Trie {
         // create a map of the children starting at the root
         Map<Character, TrieNode> children = root.children;
         TrieNode t = null;
-        
         // read through the children until you find the bottom of the word
         // or you find a mismatch
         for(int i =0; i<lowerWord.length();i++){
@@ -64,7 +68,6 @@ public class Trie {
                 return null;
             }
         }
-        
         // if full word was found, return t
         return t;
     }
@@ -96,17 +99,14 @@ public class Trie {
             stringArray[i] = wordRankings.removeMin().getValue().toString();
             i++;
         }
-        
         // Section for Debugging
-//        System.out.println();
-//        System.out.println("Prefix: "+prefix);
-//        System.out.println("Your guesses are:");
-//        for(String s: stringArray){
-//            System.out.println(s);
-//        }
-//        System.out.println();
-
-
+        // System.out.println();
+        // System.out.println("Prefix: "+prefix);
+        // System.out.println("Your guesses are:");
+        // for(String s: stringArray){
+        //     System.out.println(s);
+        // }
+        // System.out.println();
         return stringArray;
     }
 
@@ -132,8 +132,7 @@ public class Trie {
         }
         // doesn't return cause modifying a class variable
         // the class variable is cleared for each prefix search
-        // not the cleanest way to do this, but it's easy
-        
+        // not the cleanest way to do this, but it's easy   
     }
     
     
