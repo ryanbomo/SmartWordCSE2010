@@ -6,7 +6,9 @@ This is the README.md for our CSE2010 Group Project.
 
 Our initial goal is to turn in a functional product.  Timing and space are irrelevant to our goal of delivery.
 
-Goals for the final product will be discussed in Lab on Wednesday 11/30/2016.
+Goal for final Product
+	Approach an accuracy of 50
+	Cut down on space needed.
 
 ## Design
 
