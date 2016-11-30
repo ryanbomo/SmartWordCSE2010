@@ -83,21 +83,31 @@ public class Trie {
     
     public String[] returnLikely(String prefix){
         TrieNode t = searchNode(prefix);
+        
+        /*
+        Need to add check for null t here, to get over them typos
+        */
+        
+        
         wordRankings = new HeapAdaptablePriorityQueue();
         recursiveHeapBuild(t);
         String[] stringArray = new String[3];
         int i = 0;
-        while(!wordRankings.isEmpty() && i>3){
-            stringArray[i] = wordRankings.removeMin().toString();
+        while(!wordRankings.isEmpty() && i<3){
+            stringArray[i] = wordRankings.removeMin().getValue().toString();
             i++;
         }
-        System.out.println();
-        System.out.println("Prefix: "+prefix);
-        System.out.println("Your guesses are:");
-        for(String s: stringArray){
-            System.out.println(s);
-        }
-        System.out.println();
+        
+        // Sectin for Debugging
+//        System.out.println();
+//        System.out.println("Prefix: "+prefix);
+//        System.out.println("Your guesses are:");
+//        for(String s: stringArray){
+//            System.out.println(s);
+//        }
+//        System.out.println();
+
+
         return stringArray;
     }
     /*
@@ -119,9 +129,8 @@ public class Trie {
         // if t has weight, add word and weight to heap
         if(t.weight>0){
             wordRankings.insert(t.weight, t.word);
-            System.out.println(t.weight);
-            System.out.println(t.word);
         }
+        //System.out.println(wordRankings.min().getValue());
         // doesn't return cause modifying a class variable
         // the class variable is cleared for each prefix search
         // not the cleanest way to do this, but it's easy
