@@ -10,6 +10,27 @@ Our initial goal is to turn in a functional product.  Timing and space are irrel
 
 #### Trie Layout
 
+	Inserting word w to our trie:
+
+                w = "dips"
+                trie =                  d,0
+                                       /    \
+                                      i,0    o,1,"do"
+                                     /   \    
+                               p,1"dip"   r,0           
+                                           \
+                                            t,1,"dirt"
+                                              
+                                                     
+                trie.insert(w)
+                trie =                  d,0
+                                       /    \
+                                      i,0    o,1,"do"
+                                     /   \     
+                              p,1,"dip"   r,0           
+                                     \      \
+                               s,1,"dips"    t,1,"dirt"
+
 ## Implementation
 
 ####Description of the overall algorithm:
