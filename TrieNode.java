@@ -24,4 +24,12 @@ public class TrieNode {
     public TrieNode(char c){
         this.c = c;
     }
+    
+    public boolean hasChildren(){
+        if(children.isEmpty()){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

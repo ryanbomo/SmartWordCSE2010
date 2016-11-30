@@ -35,20 +35,30 @@
  */
 package SmartWord;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class SmartWord {
 
     String[] guesses = new String[3];  // 3 guesses from SmartWord
     Trie wordBank = new Trie();
-    int currentWordPos;
+    int currentWordPos = -1;
     String currentWord;
 
     // initialize SmartWord with a file of English words
-    public SmartWord(String wordFile) {
+    public SmartWord(String wordFile) throws IOException {
         /*
         Initialize Trie using word list argument
          */
+        File dumby = new File("");
+        String filePath = dumby.getAbsolutePath() + "/";
+        dumby.delete();
+        filePath = filePath + wordFile;
+        String wordsFullText = new String(Files.readAllBytes(Paths.get(filePath)));
         String lineBreak = System.getProperty("line.separator");
-        String[] eachWord = wordFile.split(lineBreak);
+        String[] eachWord = wordsFullText.split(lineBreak);
         for(String w: eachWord){
             w = w.toLowerCase();
             wordBank.insert(w);
@@ -57,9 +67,15 @@ public class SmartWord {
     }
 
     // process old messages from oldMessageFile
-    public void processOldMessages(String oldMessageFile) {
+    public void processOldMessages(String oldMessageFile) throws IOException {
+        File dumby = new File("");
+        String filePath = dumby.getAbsolutePath() + "/";
+        dumby.delete();
+        filePath = filePath + oldMessageFile;
+        
+        String newFullText = new String(Files.readAllBytes(Paths.get(filePath)));
         String lineBreak = System.getProperty("line.separator");
-        String[] individualLines = oldMessageFile.split(lineBreak);
+        String[] individualLines  = newFullText.split(lineBreak);
         // iterate over each line from the input
         for(int i = 0; i<individualLines.length;i++){
             String[] words = individualLines[i].split(" ");
@@ -99,10 +115,10 @@ public class SmartWord {
         // if not, get stuff ready for new word
         if(wordPosition != currentWordPos){
             currentWordPos = wordPosition;
-            currentWord = "";
+            currentWord = Character.toString(letter);
+        }else{
+            currentWord = currentWord + letter;
         }
-        
-        currentWord = currentWord + letter;
         String[] guesses = wordBank.returnLikely(currentWord);
         return guesses;
     }

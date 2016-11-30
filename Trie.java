@@ -91,6 +91,13 @@ public class Trie {
             stringArray[i] = wordRankings.removeMin().toString();
             i++;
         }
+        System.out.println();
+        System.out.println("Prefix: "+prefix);
+        System.out.println("Your guesses are:");
+        for(String s: stringArray){
+            System.out.println(s);
+        }
+        System.out.println();
         return stringArray;
     }
     /*
@@ -102,7 +109,7 @@ public class Trie {
     
     public void recursiveHeapBuild(TrieNode t){
         // if t has children, call recursiveHeapBuild on each child
-        if(t.hasChildren()){
+        if(!t.children.isEmpty()){
             for(Map.Entry<Character, TrieNode> entry : t.children.entrySet()){
                 TrieNode c = entry.getValue();
                 recursiveHeapBuild(c);
@@ -112,6 +119,8 @@ public class Trie {
         // if t has weight, add word and weight to heap
         if(t.weight>0){
             wordRankings.insert(t.weight, t.word);
+            System.out.println(t.weight);
+            System.out.println(t.word);
         }
         // doesn't return cause modifying a class variable
         // the class variable is cleared for each prefix search
