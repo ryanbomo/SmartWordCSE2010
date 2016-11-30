@@ -69,11 +69,11 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
 
 ## Results - Initial Submission
 
-1. Here are our results with the Clinton txt files.
+- Here are our initial results with the Clinton txt files.
 
 ![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_1.png?raw=true)
 
-2. Here are our results with the Trump txt files.
+- Here are our initial results with the Trump txt files.
 
 ![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_2.png?raw=true)
 
