@@ -15,14 +15,14 @@ Our initial goal is to turn in a functional product.  Timing and space are irrel
 ####Description of the overall algorithm:
 
 1. Grab word list and build trie from the word list [Done in SmartWord]
-  a. These words are then inserted into the Trie
-  b. General structure for trie is used, but instead of worrying about leaves, the last letter of each word is given the word weight and the word string. This allows the ends of words to be seen logically, but saves space in not needing blank nodes at the end of the trie.
+  1. These words are then inserted into the Trie
+  2. General structure for trie is used, but instead of worrying about leaves, the last letter of each word is given the word weight and the word string. This allows the ends of words to be seen logically, but saves space in not needing blank nodes at the end of the trie.
 
 2. Process the old messages by chopping the file into lines, and then the lines into words. [Done in processOldMessages]
-  a.  check to make sure each word is valid
+  1.  check to make sure each word is valid
     -If the word has ANY non-alphabet characters, the word is ignored.
     -Currently an issue of ignoring the last word of a sentence, due to punctuation.
-  b. each valid word is inserted
+  2. each valid word is inserted
     - On insertion, if it's not in the trie, it is added
     - If it is in the trie, then the weight is incremented by 1
 
