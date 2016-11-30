@@ -34,33 +34,13 @@ public class Trie {
             
             children = t.children;
             
+            // Once you get to the end of the word
+            // add the weight to the node of the last letter
+            // this marks unique words and allows us to quickly get the weight
             if(i==lowerWord.length()-1){
                 t.weight++;
                 t.word = lowerWord;
             }
-        }
-    }
-    
-    
-    // Searches trie for a word
-    public boolean search(String word){
-        TrieNode t = searchNode(word);
-        
-        if(t !=null && t.weight>0){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
-    // searches trie to see if there exists a word with the given prefix
-    // used to check if entry will have a valid guess with the prefix
-    // if it does not, it will guess the closest it can
-    public boolean startsWith(String prefix){
-        if(searchNode(prefix)==null){
-            return false;
-        }else{
-            return true;
         }
     }
     
