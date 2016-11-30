@@ -3,7 +3,8 @@
 This is the README.md for our CSE2010 Group Project.
 
 ## Goal
-	Our initial goal is to turn in a functional product.  Timing and space are irrelevant to our goal of delivery.
+
+Our initial goal is to turn in a functional product.  Timing and space are irrelevant to our goal of delivery.
 
 ## Design
 	 Description of the overall algorithm:
