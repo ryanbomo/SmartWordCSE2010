@@ -12,7 +12,7 @@ Goals for the final product will be discussed in Lab on Wednesday 11/30/2016.
 
 #### Trie Layout
 
-	Inserting word w to our trie:
+	Inserting word w that's not already in our Trie:
 
                 w = "dips"
                 trie =                  d,0
@@ -32,6 +32,27 @@ Goals for the final product will be discussed in Lab on Wednesday 11/30/2016.
                               p,1,"dip"   r,0           
                                      \      \
                                s,1,"dips"    t,1,"dirt"
+	
+	IF ALREADY IN TRIE:
+
+                w = "dips"
+                trie =                  d,0
+                                       /    \
+                                      i,0    o,1,"do"
+                                     /   \     
+                              p,1,"dip"   r,0           
+                                     \      \
+                               s,1,"dips"    t,1,"dirt"
+                                              
+                                                     
+                trie.insert(w)
+                trie =                  d,0
+                                       /    \
+                                      i,0    o,1,"do"
+                                     /   \     
+                              p,1,"dip"   r,0           
+                                     \      \
+                               s,2,"dips"    t,1,"dirt"
 
 ## Implementation
 
