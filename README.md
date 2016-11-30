@@ -92,11 +92,20 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
 
 - Here are our initial results with the Clinton txt files.
 
-![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_1.png?raw=true)
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_hilary_1.png?raw=true)
 
 - Here are our initial results with the Trump txt files.
 
-![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_2.png?raw=true)
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_1.png?raw=true)
+
+- Insert can now use variable weights for inserting a word
+  - New Hilary results:
+
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_hilary_2.png?raw=true)
+
+  - New Trump Results
+
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_2.png?raw=true)
 
 
 ## Changes to Initial Submission
