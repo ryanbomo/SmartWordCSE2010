@@ -19,28 +19,26 @@ Our initial goal is to turn in a functional product.  Timing and space are irrel
 
     a.  check to make sure each word is valid
 
-        -If the word has ANY non-alphabet characters, the word is ignored.
+       -If the word has ANY non-alphabet characters, the word is ignored.
 
-        -Currently an issue of ignoring the last word of a sentence, due to
-         punctuation.
+       -Currently an issue of ignoring the last word of a sentence, due to punctuation.
 
     b. each valid word is inserted
 
-        - On insertion, if it's not in the trie, it is added
+       - On insertion, if it's not in the trie, it is added
 
-        - If it is in the trie, then the weight is incremented by 1
+       - If it is in the trie, then the weight is incremented by 1
 
 3. Guess by traversing the trie and returning highest weighted words that could possibly start with letters typed so far
 
     a. 
 
 4. Evaluate our accuracy
+	-If accurate, increment weight of word by 1
 
-        If accurate, increment weight of word by 1
+       	-If Inaccurate but target is in trie, increment weight of correct word by 1
 
-        If Inaccurate but target is in trie, increment weight of correct word by 1
-
-        If Inaccurate but target is not in trie, add to trie and set weight to 1
+       	-If Inaccurate but target is not in trie, add to trie and set weight to 1
 
 ## Implementation
 
