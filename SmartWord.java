@@ -1,6 +1,8 @@
 /*
-  Authors (group members): Ryan Bomalaski
+  Authors (group members):  Ryan Bomalaski
+                            Zachariah Watkins-Wiseman
   Email addresses of group members: rbomalaski2015@my.fit.edu
+                                    
   Group name: 4C
   Course: CSE 2010
   Section: 4
@@ -42,7 +44,7 @@ Sources:
         -Used my personal github for version control with gropu
         -I'm worried that other groups may have copied, as this isn't private
         -If I could do this all over again, I wouldn't have done this, as
-         my group didn't actually do anything, so they didn't need the access...
+         my group didn't really need the version control
 
 Potential Improvements:
     - Fix issue in oldMessageProcessing that ignores any word with punctuatoin
