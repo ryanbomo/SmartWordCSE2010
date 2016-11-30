@@ -84,21 +84,32 @@ public class Trie {
     public String[] returnLikely(String prefix){
         TrieNode t = searchNode(prefix);
         
-        /*
-        Need to add check for null t here, to get over them typos
-        */
+        // typos and words that are not yet in the dicitonary will cause and issue
+        // this just adds the prefix and returns that as the only guess if we've
+        // reached a point where the prefix is not in the Trie
+        if(t==null){
+            String[] stringArray = new String[3];
+            stringArray[1] = prefix;
+            return stringArray;
+        }
         
-        
+        // This creates a new priority heap
         wordRankings = new HeapAdaptablePriorityQueue();
+        
+        // recursively search through the trie to build the heap
         recursiveHeapBuild(t);
+        
+        // reinitialize the guesses to be returned
         String[] stringArray = new String[3];
         int i = 0;
+        
+        // pop the three most likely guesses from the heap
         while(!wordRankings.isEmpty() && i<3){
             stringArray[i] = wordRankings.removeMin().getValue().toString();
             i++;
         }
         
-        // Sectin for Debugging
+        // Section for Debugging
 //        System.out.println();
 //        System.out.println("Prefix: "+prefix);
 //        System.out.println("Your guesses are:");
@@ -110,12 +121,11 @@ public class Trie {
 
         return stringArray;
     }
-    /*
-        Go to Trie at prefix
-        Make a Priority Queue of all children that have weight > 0
-        Do three pops from priority queue for 3 most likely words
-        return that string array
-    */
+
+    // This is a recursive algorithm to look through each node in a subtree
+    // Given the root node, this looks at each child, grabs any that
+    // have weight > 0 (which for us means are the end of a word)
+    // and puts the stored word into the priority queue with the weight as the key
     
     public void recursiveHeapBuild(TrieNode t){
         // if t has children, call recursiveHeapBuild on each child
@@ -125,12 +135,13 @@ public class Trie {
                 recursiveHeapBuild(c);
             }
         }
-        
         // if t has weight, add word and weight to heap
+        // currently has an issue where if two possible guesses have
+        // same weight, only one is put into the heap
+        // it's a key vs value issue
         if(t.weight>0){
             wordRankings.insert(t.weight, t.word);
         }
-        //System.out.println(wordRankings.min().getValue());
         // doesn't return cause modifying a class variable
         // the class variable is cleared for each prefix search
         // not the cleanest way to do this, but it's easy
