@@ -9,14 +9,23 @@
 
   Description of the overall algorithm:
 1. Grab word list and build trie from the word list [Done in SmartWord]
-    a. Initial weight for each word is 0 to allow for each word to be a valid guess
-        But without having to worry about whether it's been used or not
+    a. These words are then inserted into the Trie
+    b. General structure for trie is used, but instead of worrying about leaves,
+        the last letter of each word is given the word weight and the word string.
+        This allows the ends of words to be seen logically, but saves space in not
+        needing blank nodes at the end of the trie.
 2. Process the old messages by chopping the file into lines, and then the lines
     into words. [Done in processOldMessages]
-        If the word is in the trie, increment its weight by one and restructure trie
-        Else put the word in the trie with weight of 1 
+    a.  check to make sure each word is valid
+    b. each valid word is inserted
+        - On insertion, if it's not in the trie, it is added
+        - If it is in the trie, then the weight is incremented by 1
 3. Guess by traversing the trie and returning highest weighted words that could
     possibly start with letters typed so far
+    a. Unsure of implementation, currently using a hash table where children store
+        word weight in the last letter of the word
+        - Could implement a priority queue for this, so that we can pop the highest 
+            priority possible guesses
 4. Evaluate our accuracy
         If accurate, increment weight of word by 1
         If Inaccurate but target is in trie, increment weight of correct word by 1
@@ -30,6 +39,8 @@ public class SmartWord {
 
     String[] guesses = new String[3];  // 3 guesses from SmartWord
     Trie wordBank = new Trie();
+    int currentWordPos;
+    String currentWord;
 
     // initialize SmartWord with a file of English words
     public SmartWord(String wordFile) {
@@ -84,7 +95,15 @@ public class SmartWord {
     // letterPosition:  position of the letter in the word, starts from 0
     // wordPosition: position of the word in a message, starts from 0
     public String[] guess(char letter, int letterPosition, int wordPosition) {
-
+        // make sure we are still on the same word
+        // if not, get stuff ready for new word
+        if(wordPosition != currentWordPos){
+            currentWordPos = wordPosition;
+            currentWord = "";
+        }
+        
+        currentWord = currentWord + letter;
+        String[] guesses = wordBank.returnLikely(currentWord);
         return guesses;
     }
 

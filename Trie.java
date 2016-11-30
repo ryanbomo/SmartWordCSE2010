@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class Trie {
     private TrieNode root;
+    HeapAdaptablePriorityQueue wordRankings;
     
     public Trie(){
         root = new TrieNode();
@@ -80,11 +81,43 @@ public class Trie {
         return t;
     }
     
-    // public String[] returnLikely(String prefix)
+    public String[] returnLikely(String prefix){
+        TrieNode t = searchNode(prefix);
+        wordRankings = new HeapAdaptablePriorityQueue();
+        recursiveHeapBuild(t);
+        String[] stringArray = new String[3];
+        int i = 0;
+        while(!wordRankings.isEmpty() && i>3){
+            stringArray[i] = wordRankings.removeMin().toString();
+            i++;
+        }
+        return stringArray;
+    }
     /*
-        This will return the most likely 3 guess given a prefix
-        Searches into the prefix, then finds the children with the highest weight
+        Go to Trie at prefix
+        Make a Priority Queue of all children that have weight > 0
+        Do three pops from priority queue for 3 most likely words
+        return that string array
     */
+    
+    public void recursiveHeapBuild(TrieNode t){
+        // if t has children, call recursiveHeapBuild on each child
+        if(t.hasChildren()){
+            for(Map.Entry<Character, TrieNode> entry : t.children.entrySet()){
+                TrieNode c = entry.getValue();
+                recursiveHeapBuild(c);
+            }
+        }
+        
+        // if t has weight, add word and weight to heap
+        if(t.weight>0){
+            wordRankings.insert(t.weight, t.word);
+        }
+        // doesn't return cause modifying a class variable
+        // the class variable is cleared for each prefix search
+        // not the cleanest way to do this, but it's easy
+        
+    }
     
     
 }
