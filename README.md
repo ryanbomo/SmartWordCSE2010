@@ -80,4 +80,8 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
 
 ## Changes to Initial Submission
 
+TBA
+
 ## Results - Final Submission
+
+TBA
