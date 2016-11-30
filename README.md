@@ -24,7 +24,7 @@ Goals for the final product will be discussed in Lab on Wednesday 11/30/2016.
                                             t,1,"dirt"
                                               
                                                      
-                trie.insert(w)
+                trie.insert(w,1)
                 trie =                  d,0
                                        /    \
                                       i,0    o,1,"do"
@@ -45,7 +45,7 @@ Goals for the final product will be discussed in Lab on Wednesday 11/30/2016.
                                s,1,"dips"    t,1,"dirt"
                                               
                                                      
-                trie.insert(w)
+                trie.insert(w,1)
                 trie =                  d,0
                                        /    \
                                       i,0    o,1,"do"
