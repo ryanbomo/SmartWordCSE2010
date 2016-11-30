@@ -67,24 +67,32 @@ public class Trie {
     
     // Used by other methods to find specific nodes
     public TrieNode searchNode(String str){
+        String lowerWord = str.toLowerCase();
+        // create a map of the children starting at the root
         Map<Character, TrieNode> children = root.children;
         TrieNode t = null;
-        for(int i =0; i<str.length();i++){
-            char c = str.charAt(i);
+        
+        // read through the children until you find the bottom of the word
+        // or you find a mismatch
+        for(int i =0; i<lowerWord.length();i++){
+            char c = lowerWord.charAt(i);
             if(children.containsKey(c)){
                 t = children.get(c);
                 children = t.children;
             }else{
+                // couldn't find word
                 return null;
             }
         }
+        
+        // if full word was found, return t
         return t;
     }
     
     public String[] returnLikely(String prefix){
         TrieNode t = searchNode(prefix);
         
-        // typos and words that are not yet in the dicitonary will cause and issue
+        // typos and words that are not yet in the dicitonary will cause an issue
         // this just adds the prefix and returns that as the only guess if we've
         // reached a point where the prefix is not in the Trie
         if(t==null){

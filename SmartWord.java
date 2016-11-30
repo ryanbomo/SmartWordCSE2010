@@ -31,6 +31,13 @@
         If Inaccurate but target is in trie, increment weight of correct word by 1
         If Inaccurate but target is not in trie, add to trie and set weight to 1
 
+Sources:
+    1.https://gist.github.com/kylebgorman/3099639
+        -Used to help with design of Trie and TrieNode classes
+    2. Our Text Book/Code from Author
+        -Used for Adapatable Priority Heap imlementation
+        -Default Comparator was slightly modified to prefer high value over low
+    3.
 
  */
 package SmartWord;
