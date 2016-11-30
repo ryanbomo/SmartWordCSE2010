@@ -153,6 +153,11 @@ public class SmartWord {
     // b.         false               null
     // c.         false               correct word
     public void feedback(boolean isCorrectGuess, String correctWord) {
+        if(isCorrectGuess){
+            wordBank.insert(correctWord);
+        }else if(!isCorrectGuess && correctWord != null){
+            wordBank.insert(correctWord);
+        }
 
     }
 
