@@ -6,6 +6,8 @@ This is the README.md for our CSE2010 Group Project.
 
 Our initial goal is to turn in a functional product.  Timing and space are irrelevant to our goal of delivery.
 
+Goals for the final product will be discussed in Lab on Wednesday 11/30/2016.
+
 ## Design
 
 #### Trie Layout
@@ -66,6 +68,15 @@ Our initial goal is to turn in a functional product.  Timing and space are irrel
 We tested using the clinton and trump txt files provided by the teacher.  I will create a few more test files of my own out of essays I typed in undergrad.
 
 ## Results - Initial Submission
+
+1. Here are our results with the Clinton txt files.
+
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_1.png?raw=true)
+
+2. Here are our results with the Trump txt files.
+
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_2.png?raw=true)
+
 
 ## Changes to Initial Submission
 
