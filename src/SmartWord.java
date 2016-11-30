@@ -79,7 +79,7 @@ public class SmartWord {
         String[] eachWord = wordsFullText.split(lineBreak);
         for (String w : eachWord) {
             w = w.toLowerCase();
-            wordBank.insert(w, 10);
+            wordBank.insert(w, 2);
         }
     }
 
@@ -117,7 +117,7 @@ public class SmartWord {
                 // If the word is already in the trie, it'll increase the weight
                 // if not, it'll add it with a weight of 1
                 if (isWord) {
-                    wordBank.insert(words[j], 10);
+                    wordBank.insert(words[j], 1);
                 }
             }
         }
@@ -198,6 +198,17 @@ public class SmartWord {
             wordBank.insert(correctWord, 4);
             //System.out.println(isCorrectGuess);
             //System.out.println("Finished Typing and Correct Word is: "+correctWord);
+        } else if (!isCorrectGuess && correctWord == null){
+            for(String w: guesses){
+                if(w!=null){
+                    TrieNode t = wordBank.searchNode(w);
+                    if(t!=null){
+                        if(t.weight>1){
+                            wordBank.insert(w,-1);
+                        }
+                    }
+                }
+            }
         }
 
     }
