@@ -64,17 +64,17 @@ public class SmartWord {
     Trie wordBank = new Trie();
     int currentWordPos = -1;
     String currentWord;
-    
+
     //Storing Prior Guesses
     String[] priorGuesses = new String[3];
-    
+
     // put weights at top for quick changes to try and find best configuration
     int dictionaryWeight = 2;
     int priorWeight = 5;
     int goodGuess = 10;
     int missedGuess = 10;
     int badGuess = -1;  // be careful changing this one, our logic requires
-                        // that the weight of valid words never goes below 1
+    // that the weight of valid words never goes below 1
 
     // initialize SmartWord with a file of English words
     public SmartWord(String wordFile) throws IOException {
@@ -92,7 +92,6 @@ public class SmartWord {
 
     // process old messages from oldMessageFile
     public void processOldMessages(String oldMessageFile) throws IOException {
-
 
         String newFullText = new String(Files.readAllBytes(Paths.get(oldMessageFile)));
         String lineBreak = System.getProperty("line.separator");
@@ -125,6 +124,16 @@ public class SmartWord {
                 }
             }
         }
+        /*
+        ****************DELETE THIS SECTION IF YOU DON'T USE IT**************************************************************************
+        Section for adding lexicon or corpora with common words
+        For the most part, these have hurt accuracy, but it may be a
+        weight issue.
+        */
+//        File dumby = new File("");
+//        String filePath = dumby.getAbsolutePath() + "/";
+//        dumby.delete();
+//
 //        String libFilePath = filePath + "en_US_TWIT.txt";
 //
 //        String libFullText = new String(Files.readAllBytes(Paths.get(libFilePath)));
@@ -155,12 +164,15 @@ public class SmartWord {
 //                    // If the word is already in the trie, it'll increase the weight
 //                    // if not, it'll add it with a weight of 1
 //                    if (isWord) {
-//                        wordBank.insert(words[j],1);
+//                        wordBank.insert(words[j], 3);
 //                    }
 //                }
 //            }
 //            iterator++;
 //        }
+        /* 
+        ****************DELETE THIS SECTION IF YOU DON'T USE IT**************************************************************************
+        */
     }
 
     // based on a letter typed in by the user, return 3 word guesses in an array
@@ -177,7 +189,7 @@ public class SmartWord {
         } else {
             currentWord = currentWord + letter;
         }
-        guesses = wordBank.returnLikely(currentWord,priorGuesses);
+        guesses = wordBank.returnLikely(currentWord, priorGuesses);
         priorGuesses = guesses;
         return guesses;
     }
@@ -204,19 +216,19 @@ public class SmartWord {
             wordBank.insert(correctWord, missedGuess);
             //System.out.println(isCorrectGuess);
             //System.out.println("Finished Typing and Correct Word is: "+correctWord);
-        } else if (!isCorrectGuess && correctWord == null){
-            for(String w: guesses){
-                if(w!=null){
+        } else if (!isCorrectGuess && correctWord == null) {
+            for (String w : guesses) {
+                if (w != null) {
                     TrieNode t = wordBank.searchNode(w);
-                    if(t!=null){
+                    if (t != null) {
                         //find nominal amount to punish with
                         int punishAmount = badGuess;
-                        while(t.weight+punishAmount<1 && punishAmount<-1){
+                        while (t.weight + punishAmount < 1 && punishAmount < -1) {
                             punishAmount++;
                         }
-                        
-                        if(t.weight+punishAmount>=1){
-                            wordBank.insert(w,punishAmount);
+
+                        if (t.weight + punishAmount >= 1) {
+                            wordBank.insert(w, punishAmount);
                         }
                     }
                 }
