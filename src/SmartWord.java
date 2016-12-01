@@ -64,6 +64,13 @@ public class SmartWord {
     Trie wordBank = new Trie();
     int currentWordPos = -1;
     String currentWord;
+    
+    // put weights at top for quick changes to try and find best configuration
+    int dictionaryWeight = 2;
+    int priorWeight = 10;
+    int currentWeight = 10;
+    int badGuess = -1;  // be careful changing this one, our logic requires
+                        // that the weight of valid words never goes below 1
 
     // initialize SmartWord with a file of English words
     public SmartWord(String wordFile) throws IOException {
@@ -75,7 +82,7 @@ public class SmartWord {
         String[] eachWord = wordsFullText.split(lineBreak);
         for (String w : eachWord) {
             w = w.toLowerCase();
-            wordBank.insert(w, 2);
+            wordBank.insert(w, dictionaryWeight);
         }
     }
 
@@ -110,7 +117,7 @@ public class SmartWord {
                 // If the word is already in the trie, it'll increase the weight
                 // if not, it'll add it with a weight of 1
                 if (isWord) {
-                    wordBank.insert(words[j], 1);
+                    wordBank.insert(words[j], priorWeight);
                 }
             }
         }
@@ -184,11 +191,11 @@ public class SmartWord {
     // c.         false               correct word
     public void feedback(boolean isCorrectGuess, String correctWord) {
         if (isCorrectGuess) {
-            wordBank.insert(correctWord, 4);
+            wordBank.insert(correctWord, currentWeight);
             //System.out.println(isCorrectGuess);
             //System.out.println("Correct Guess and Correct Word is: "+correctWord);
         } else if (!isCorrectGuess && correctWord != null) {
-            wordBank.insert(correctWord, 4);
+            wordBank.insert(correctWord, currentWeight);
             //System.out.println(isCorrectGuess);
             //System.out.println("Finished Typing and Correct Word is: "+correctWord);
         } else if (!isCorrectGuess && correctWord == null){
@@ -197,7 +204,7 @@ public class SmartWord {
                     TrieNode t = wordBank.searchNode(w);
                     if(t!=null){
                         if(t.weight>1){
-                            wordBank.insert(w,-1);
+                            wordBank.insert(w,badGuess);
                         }
                     }
                 }
