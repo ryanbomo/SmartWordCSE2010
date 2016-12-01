@@ -9,10 +9,14 @@
 
   Description of the overall algorithm:
 1. Grab word list and build trie from the word list [Done in SmartWord]
-    a. These words are then inserted into the Trie
-    b. General structure for trie is used, but instead of worrying about leaves, the last letter of each word is given the word weight and the word string. This allows the ends of words to be seen logically, but saves space in not needing blank nodes at the end of the trie.
+    a.  These words are then inserted into the Trie
+    b.  General structure for trie is used, but instead of worrying about leaves,
+        the last letter of each word is given the word weight and the word string. 
+        This allows the ends of words to be seen logically, but saves space in not 
+        needing blank nodes at the end of the trie.
 
-2. Process the old messages by chopping the file into lines, and then the lines into words. [Done in processOldMessages]
+2.  Process the old messages by chopping the file into lines, and then the lines 
+    into words. [Done in processOldMessages]
     a.  check to make sure each word is valid
        -If the word has ANY non-alphabet characters, the word is ignored.
        -Currently an issue of ignoring the last word of a sentence, due to punctuation.
@@ -21,7 +25,9 @@
        - On insertion, if it's not in the trie, it is added
        - If it is in the trie, then the weight is incremented by 1
 
-3. Guess by traversing the trie and returning highest weighted words that could possibly start with letters typed so far
+3.  Guess by traversing the trie and returning highest weighted words that could 
+    possibly start with letters typed so far
+
     a. given a letter and a word position, check to see if still on current word
     b. if still on current word, append letter
     c. if not still on current word, create new word starting with letter
@@ -68,13 +74,11 @@ public class SmartWord {
     //Storing Prior Guesses
     String[] priorGuesses = new String[3];
 
-    // put weights at top for quick changes to try and find best configuration
-    int dictionaryWeight = 2;
-    int priorWeight = 5;
-    int goodGuess = 10;
-    int missedGuess = 10;
-    int badGuess = -1;  // be careful changing this one, our logic requires
-    // that the weight of valid words never goes below 1
+    int dictionaryWeight = 2;                                                   // put weights at top for quick changes to try
+    int priorWeight = 5;                                                        // and find best configuration
+    int goodGuess = 10;                                                         // be careful changing badGuess, our logic requires
+    int missedGuess = 10;                                                       // that the weight of valid words never goes below 1
+    int badGuess = -1;
 
     // initialize SmartWord with a file of English words
     public SmartWord(String wordFile) throws IOException {
@@ -100,79 +104,72 @@ public class SmartWord {
         for (int i = 0; i < individualLines.length; i++) {
             String[] words = individualLines[i].split(" ");
 
-            // iterate over each word on the line
-            // we will check to make sure the whole word is letters
-            // if it's not, isWord becomes false and we don't worry about the word
-            for (int j = 0; j < words.length; j++) {
-                boolean isWord = true;
+            for (int j = 0; j < words.length; j++) {                            // iterate over each word on the line
+                boolean isWord = true;                                          // we will check to make sure the whole word is letters
 
-                // iterate over each character in the word
-                // if a character is not a letter, ignore the whole word
-                for (int k = 0; k < words[j].length(); k++) {
+                for (int k = 0; k < words[j].length(); k++) {                   // iterate over each character in the word
                     char thisChar = words[j].charAt(k);
-                    boolean letter = Character.isLetter(thisChar);
+                    boolean letter = Character.isLetter(thisChar);              // if a character is not a letter, ignore the whole word
                     if (!letter) {
                         isWord = false;
                     }
                 }
 
-                // if the word has only letters, we insert it into the trie
-                // If the word is already in the trie, it'll increase the weight
-                // if not, it'll add it with a weight of 1
                 if (isWord) {
-                    wordBank.insert(words[j], priorWeight);
+                    wordBank.insert(words[j], priorWeight);                     // if the character is only alphabet letters, insert it
+                                                                                // even if it's already in the trie. It'll increase the
+                                                                                // weight.
                 }
             }
         }
         /*
         ****************DELETE THIS SECTION IF YOU DON'T USE IT**************************************************************************
-        Section for adding lexicon or corpora with common words
-        For the most part, these have hurt accuracy, but it may be a
-        weight issue.
-        */
-//        File dumby = new File("");
-//        String filePath = dumby.getAbsolutePath() + "/";
-//        dumby.delete();
-//
-//        String libFilePath = filePath + "en_US_TWIT.txt";
-//
-//        String libFullText = new String(Files.readAllBytes(Paths.get(libFilePath)));
-//        String[] individualLibLines = libFullText.split(lineBreak);
-//
-//        int iterator = 0;
-//        while (iterator < 1) {
-//            for (int i = 0; i < individualLibLines.length; i++) {
-//                String[] words = individualLibLines[i].split(" ");
-//
-//                // iterate over each word on the line
-//                // we will check to make sure the whole word is letters
-//                // if it's not, isWord becomes false and we don't worry about the word
-//                for (int j = 0; j < words.length; j++) {
-//                    boolean isWord = true;
-//
-//                    // iterate over each character in the word
-//                    // if a character is not a letter, ignore the whole word
-//                    for (int k = 0; k < words[j].length(); k++) {
-//                        char thisChar = words[j].charAt(k);
-//                        boolean letter = Character.isLetter(thisChar);
-//                        if (!letter) {
-//                            isWord = false;
-//                        }
-//                    }
-//
-//                    // if the word has only letters, we insert it into the trie
-//                    // If the word is already in the trie, it'll increase the weight
-//                    // if not, it'll add it with a weight of 1
-//                    if (isWord) {
-//                        wordBank.insert(words[j], 3);
-//                    }
-//                }
-//            }
-//            iterator++;
-//        }
-        /* 
+        // Section for adding lexicon or corpora with common words
+        // For the most part, these have hurt accuracy, but it may be a
+        // weight issue.
+
+        File dumby = new File("");
+        String filePath = dumby.getAbsolutePath() + "/";
+        dumby.delete();
+
+        String libFilePath = filePath + "en_US_TWIT.txt";
+
+        String libFullText = new String(Files.readAllBytes(Paths.get(libFilePath)));
+        String[] individualLibLines = libFullText.split(lineBreak);
+
+        int iterator = 0;
+        while (iterator < 1) {
+            for (int i = 0; i < individualLibLines.length; i++) {
+                String[] words = individualLibLines[i].split(" ");
+
+                // iterate over each word on the line
+                // we will check to make sure the whole word is letters
+                // if it's not, isWord becomes false and we don't worry about the word
+                for (int j = 0; j < words.length; j++) {
+                    boolean isWord = true;
+
+                    // iterate over each character in the word
+                    // if a character is not a letter, ignore the whole word
+                    for (int k = 0; k < words[j].length(); k++) {
+                        char thisChar = words[j].charAt(k);
+                        boolean letter = Character.isLetter(thisChar);
+                        if (!letter) {
+                            isWord = false;
+                        }
+                    }
+
+                    // if the word has only letters, we insert it into the trie
+                    // If the word is already in the trie, it'll increase the weight
+                    // if not, it'll add it with a weight of 1
+                    if (isWord) {
+                        wordBank.insert(words[j], 3);
+                    }
+                }
+            }
+            iterator++;
+        }
         ****************DELETE THIS SECTION IF YOU DON'T USE IT**************************************************************************
-        */
+         */
     }
 
     // based on a letter typed in by the user, return 3 word guesses in an array
@@ -180,18 +177,16 @@ public class SmartWord {
     // letterPosition:  position of the letter in the word, starts from 0
     // wordPosition: position of the word in a message, starts from 0
     public String[] guess(char letter, int letterPosition, int wordPosition) {
-        // make sure we are still on the same word
-        // if not, get stuff ready for new word
-        if (wordPosition != currentWordPos) {
-            currentWordPos = wordPosition;
-            priorGuesses = new String[3];
-            currentWord = Character.toString(letter);
+        if (wordPosition != currentWordPos) {                                   // make sure we are still on the same word
+            currentWordPos = wordPosition;                                      // if not, set new word position
+            priorGuesses = new String[3];                                       // clear previous guesses
+            currentWord = Character.toString(letter);                           // start new word
         } else {
-            currentWord = currentWord + letter;
+            currentWord = currentWord + letter;                                 // if we are on the same word, append next letter
         }
-        guesses = wordBank.returnLikely(currentWord, priorGuesses);
-        priorGuesses = guesses;
-        return guesses;
+        guesses = wordBank.returnLikely(currentWord, priorGuesses);             // grab the guesses
+        priorGuesses = guesses;                                                 // set priorguesses to current guesses
+        return guesses;                                                         // return guesses
     }
 
     // feedback on the 3 guesses from the user
@@ -208,32 +203,31 @@ public class SmartWord {
     // b.         false               null
     // c.         false               correct word
     public void feedback(boolean isCorrectGuess, String correctWord) {
+            // boost good guess
         if (isCorrectGuess) {
             wordBank.insert(correctWord, goodGuess);
-            //System.out.println(isCorrectGuess);
-            //System.out.println("Correct Guess and Correct Word is: "+correctWord);
+            
+            // boost missed guess
         } else if (!isCorrectGuess && correctWord != null) {
             wordBank.insert(correctWord, missedGuess);
-            //System.out.println(isCorrectGuess);
-            //System.out.println("Finished Typing and Correct Word is: "+correctWord);
+            
+            //punish bad guess
         } else if (!isCorrectGuess && correctWord == null) {
             for (String w : guesses) {
-                if (w != null) {
+                if (w != null && wordBank.searchNode(w) != null) {
                     TrieNode t = wordBank.searchNode(w);
-                    if (t != null) {
-                        //find nominal amount to punish with
-                        int punishAmount = badGuess;
-                        while (t.weight + punishAmount < 1 && punishAmount < -1) {
-                            punishAmount++;
-                        }
+                    
+                    //find maximum amount to punish with
+                    int punishAmount = badGuess;
+                    while (t.weight + punishAmount < 1 && punishAmount < -1) {  // since our logic relies on words to be designated by positive
+                        punishAmount++;                                         // weights on end letters, we need to make sure we don't
+                    }                                                           // punish bad guesses below this threshhold
 
-                        if (t.weight + punishAmount >= 1) {
-                            wordBank.insert(w, punishAmount);
-                        }
+                    if (t.weight + punishAmount >= 1) {
+                        wordBank.insert(w, punishAmount);
                     }
                 }
             }
         }
-
     }
 }
