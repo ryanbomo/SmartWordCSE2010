@@ -70,11 +70,7 @@ public class SmartWord {
         /*
         Initialize Trie using word list argument
          */
-        File dumby = new File("");
-        String filePath = dumby.getAbsolutePath() + "/";
-        dumby.delete();
-        String filePathLib = filePath + wordFile;
-        String wordsFullText = new String(Files.readAllBytes(Paths.get(filePathLib)));
+        String wordsFullText = new String(Files.readAllBytes(Paths.get(wordFile)));
         String lineBreak = System.getProperty("line.separator");
         String[] eachWord = wordsFullText.split(lineBreak);
         for (String w : eachWord) {
@@ -85,12 +81,9 @@ public class SmartWord {
 
     // process old messages from oldMessageFile
     public void processOldMessages(String oldMessageFile) throws IOException {
-        File dumby = new File("");
-        String filePath = dumby.getAbsolutePath() + "/";
-        dumby.delete();
-        String oldFilePath = filePath + oldMessageFile;
 
-        String newFullText = new String(Files.readAllBytes(Paths.get(oldFilePath)));
+
+        String newFullText = new String(Files.readAllBytes(Paths.get(oldMessageFile)));
         String lineBreak = System.getProperty("line.separator");
         String[] individualLines = newFullText.split(lineBreak);
         // iterate over each line from the input
