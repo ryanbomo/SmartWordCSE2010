@@ -65,10 +65,14 @@ public class SmartWord {
     int currentWordPos = -1;
     String currentWord;
     
+    //Storing Prior Guesses
+    String[] priorGuesses = new String[3];
+    
     // put weights at top for quick changes to try and find best configuration
     int dictionaryWeight = 2;
-    int priorWeight = 10;
-    int currentWeight = 10;
+    int priorWeight = 5;
+    int goodGuess = 10;
+    int missedGuess = 10;
     int badGuess = -1;  // be careful changing this one, our logic requires
                         // that the weight of valid words never goes below 1
 
@@ -168,11 +172,13 @@ public class SmartWord {
         // if not, get stuff ready for new word
         if (wordPosition != currentWordPos) {
             currentWordPos = wordPosition;
+            priorGuesses = new String[3];
             currentWord = Character.toString(letter);
         } else {
             currentWord = currentWord + letter;
         }
-        guesses = wordBank.returnLikely(currentWord);
+        guesses = wordBank.returnLikely(currentWord,priorGuesses);
+        priorGuesses = guesses;
         return guesses;
     }
 
@@ -191,11 +197,11 @@ public class SmartWord {
     // c.         false               correct word
     public void feedback(boolean isCorrectGuess, String correctWord) {
         if (isCorrectGuess) {
-            wordBank.insert(correctWord, currentWeight);
+            wordBank.insert(correctWord, goodGuess);
             //System.out.println(isCorrectGuess);
             //System.out.println("Correct Guess and Correct Word is: "+correctWord);
         } else if (!isCorrectGuess && correctWord != null) {
-            wordBank.insert(correctWord, currentWeight);
+            wordBank.insert(correctWord, missedGuess);
             //System.out.println(isCorrectGuess);
             //System.out.println("Finished Typing and Correct Word is: "+correctWord);
         } else if (!isCorrectGuess && correctWord == null){
@@ -203,8 +209,14 @@ public class SmartWord {
                 if(w!=null){
                     TrieNode t = wordBank.searchNode(w);
                     if(t!=null){
-                        if(t.weight>1){
-                            wordBank.insert(w,badGuess);
+                        //find nominal amount to punish with
+                        int punishAmount = badGuess;
+                        while(t.weight+punishAmount<1 && punishAmount<-1){
+                            punishAmount++;
+                        }
+                        
+                        if(t.weight+punishAmount>=1){
+                            wordBank.insert(w,punishAmount);
                         }
                     }
                 }
