@@ -116,10 +116,12 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
 ####Insert can now use variable weights for inserting a word
 Our initial submission had insert add 1 to the words weight every time it was inserted.  However, we needed a way to supress bad guesses from popping back up.  So now, insert caries a weight and this is added to the weight at the node with the last letter of the word.  
 
-This means that we can initialize the words from the dictionary at a set value, and then reward successes more and punish misses less.  Currently values are initialized at 2 per dictionary insert, 1 per prior user insert, 4 per successful find insert, 4 per non-successfuly word terminating insert and -1 for bad guess insert.
+This means that we can initialize the words from the dictionary at a set value, and then reward successes more and punish misses less.  Currently values are initialized at 2 per dictionary insert, 1 per prior user insert, 10 per successful find insert, 10 per non-successfuly word terminating insert and -1 for bad guess insert.
 
 While these numbers may seem arbitrary, there is some logic.  We want to allow each word some amoun of buffer for bad guesses, so we initialize the words a bit higher than the baseline.  We want our prior history to matter, but not as much as what is currently being written.  Finally, for our current writes, whether a word is guessed correctly or not, the correct word is given +4 to its weight.  Bad guesses punish a bit, with a -1.  Currently the punishing behavior isn't quite working, but will be updated shortly.
-  
+
+I am going to create a script to try a bunch of permutations of these values and see if a clearly superior configuration comes out of it. - Ryan
+
 Words can only be lowered to 1, so as to keep them distinct from non-word terminating nodes.  We need words to remain guessable, just less likely each time they are incorrect.
 
 ## Results - Final Submission
