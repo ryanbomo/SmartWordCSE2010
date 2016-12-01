@@ -95,7 +95,7 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
 
 ## Results - Initial Submission
 
-####We now remember previous guesses for a word - Currently at Accuracy ~48
+####v0.3 - We now remember previous guesses for a word - Currently at Accuracy ~48
 
   - New Hilary Results
 
@@ -105,7 +105,7 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
 
 ![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_3.png?raw=true)
 
-####Insert can now use variable weights for inserting a word - Accuracy ~46.5
+####v0.2 - Insert can now use variable weights for inserting a word - Accuracy ~46.5
 
   - New Hilary results:
 
@@ -115,7 +115,7 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
 
 ![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_2.png?raw=true)
 
-####Original Implementation Results - Accuracy ~45.5
+####v0.1 - Original Implementation Results - Accuracy ~45.5
 
 - Here are our initial results with the Clinton txt files.
 
