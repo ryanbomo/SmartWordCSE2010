@@ -90,17 +90,21 @@ Goal for final Product
 #### Test Cases
 We tested using the clinton and trump txt files provided by the teacher.  I will create a few more test files of my own out of essays I typed in undergrad.
 
+
+
 ## Results - Initial Submission
 
-- Here are our initial results with the Clinton txt files.
+####We now remember previous guesses for a word - Currently at Accuracy ~48
 
-![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_hilary_1.png?raw=true)
+  - New Hilary Results
 
-- Here are our initial results with the Trump txt files.
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_hilary_3.png?raw=true)
 
-![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_1.png?raw=true)
+  - New Trump Results
 
-####Insert can now use variable weights for inserting a word
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_3.png?raw=true)
+
+####Insert can now use variable weights for inserting a word - Accuracy ~46.5
 
   - New Hilary results:
 
@@ -109,6 +113,16 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
   - New Trump Results
 
 ![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_2.png?raw=true)
+
+####Original Implementation Results - Accuracy ~45.5
+
+- Here are our initial results with the Clinton txt files.
+
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_hilary_1.png?raw=true)
+
+- Here are our initial results with the Trump txt files.
+
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_1.png?raw=true)
 
 
 ## Changes to Initial Submission
