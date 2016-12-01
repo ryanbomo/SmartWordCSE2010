@@ -63,6 +63,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class SmartWord {
 
@@ -72,7 +73,7 @@ public class SmartWord {
     String currentWord;
 
     //Storing Prior Guesses
-    String[] priorGuesses = new String[3];
+    ArrayList<String> previousGuesses = new ArrayList<String>();
 
     int dictionaryWeight = 2;                                                   // put weights at top for quick changes to try
     int priorWeight = 5;                                                        // and find best configuration
@@ -179,13 +180,15 @@ public class SmartWord {
     public String[] guess(char letter, int letterPosition, int wordPosition) {
         if (wordPosition != currentWordPos) {                                   // make sure we are still on the same word
             currentWordPos = wordPosition;                                      // if not, set new word position
-            priorGuesses = new String[3];                                       // clear previous guesses
+            previousGuesses = new ArrayList<String>();                                       // clear previous guesses
             currentWord = Character.toString(letter);                           // start new word
         } else {
             currentWord = currentWord + letter;                                 // if we are on the same word, append next letter
         }
-        guesses = wordBank.returnLikely(currentWord, priorGuesses);             // grab the guesses
-        priorGuesses = guesses;                                                 // set priorguesses to current guesses
+        guesses = wordBank.returnLikely(currentWord, previousGuesses);             // grab the guesses
+        for (String w: guesses){
+            previousGuesses.add(w);                                             // set previousGuesses to current guesses
+        }
         return guesses;                                                         // return guesses
     }
 

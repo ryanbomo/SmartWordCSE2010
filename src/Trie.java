@@ -5,6 +5,7 @@ package SmartWord;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
 
 public class Trie {
 
@@ -73,7 +74,7 @@ public class Trie {
         return t;
     }
 
-    public String[] returnLikely(String prefix, String[] priorAttempts) {
+    public String[] returnLikely(String prefix, ArrayList<String> priorAttempts) {
         TrieNode t = searchNode(prefix);
 
         // typos and words that are not yet in the dicitonary will cause an issue
