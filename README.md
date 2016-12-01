@@ -96,7 +96,7 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
 ## Results - Initial Submission
 ####v0.3.1 - We now remember previous guesses for a word - Currently at Accuracy ~48.25
 
-Changed from Array size 3 to an Array List.  This avoids corner cases of long words flopping between two sets of incorrect previous guesses
+Changed previous guess storage from array size 3 to an Array List.  This avoids corner cases of long words switching between two sets of incorrect previous guesses
 
   - New Hilary Results
 
