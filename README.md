@@ -79,6 +79,7 @@ Goal for final Product
   4. send word into find on trie
   5. Trie does a recursive search through all possible strings that start with the prefix
   6. Creates a priority queue with max at root, pops three times and returns those three
+  - If any of those guesses have already been tried for that word, it ignores that guess and gets another if able
 
 4. Evaluate our accuracy
   - If accurate, increment weight of word by 1
