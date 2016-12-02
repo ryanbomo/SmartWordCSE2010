@@ -11,7 +11,7 @@ public class TrieNode {
     char letter;
     
     // HashMap containing children
-    HashMap<Character, TrieNode> children = new HashMap<Character, TrieNode>();
+    TrieNode[] children = new TrieNode[26];
     
     // weight of word, to be used only on end characters
     int weight = 0;
@@ -26,10 +26,13 @@ public class TrieNode {
     }
     
     public boolean hasChildren(){
-        if(children.isEmpty()){
-            return false;
-        }else{
-            return true;
+        boolean hasChildren = false;
+        for(TrieNode t: children){
+            if(t!=null){
+                hasChildren = true;
+            }
         }
+        
+        return hasChildren;
     }
 }

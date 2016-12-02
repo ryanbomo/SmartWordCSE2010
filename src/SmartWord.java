@@ -56,6 +56,7 @@ Potential Improvements:
  */
 package SmartWord;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -88,8 +89,8 @@ public class SmartWord {
         String lineBreak = System.getProperty("line.separator");
         String[] eachWord = wordsFullText.split(lineBreak);
         for (String w : eachWord) {
-            w = w.toLowerCase();
-            wordBank.insert(w, dictionaryWeight);
+                w = w.toLowerCase();
+                wordBank.insert(w, dictionaryWeight);
         }
     }
 
@@ -107,14 +108,7 @@ public class SmartWord {
             for (int j = 0; j < words.length; j++) {
                 // iterate over each word on the line
                 // we will check to make sure the whole word is letters
-                for (int k = 0; k < words[j].length(); k++) {                   // iterate over each character in the word
-                    char thisChar = words[j].charAt(k);
-                    String thisCharString = Character.toString(thisChar);
-                    boolean letter = Character.isLetter(thisChar);              // if a character is not a letter, get rid of the character
-                    if (!letter) {
-                        words[j] = words[j].replace(thisCharString, "");
-                    }
-                }
+                words[j] = justAlphaChars(words[j]);
                 wordBank.insert(words[j], priorWeight);                     // if the character is only alphabet letters, insert it
                 // even if it's already in the trie. It'll increase the
                 // weight.
@@ -133,32 +127,21 @@ public class SmartWord {
         String[] individualLibLines = libFullText.split(lineBreak);
         int iterator = 0;
         while (iterator < 1) {
-        for (int i = 0; i < individualLibLines.length; i++) {
-        String[] words = individualLibLines[i].split(" ");
-        // iterate over each word on the line
-        // we will check to make sure the whole word is letters
-        // if it's not, isWord becomes false and we don't worry about the word
-        for (int j = 0; j < words.length; j++) {
-        boolean isWord = true;
-        // iterate over each character in the word
-        // if a character is not a letter, ignore the whole word
-        for (int k = 0; k < words[j].length(); k++) {
-        char thisChar = words[j].charAt(k);
-        boolean letter = Character.isLetter(thisChar);
-        if (!letter) {
-        isWord = false;
+            for (int i = 0; i < individualLibLines.length; i++) {
+                String[] words = individualLibLines[i].split(" ");
+                // iterate over each word on the line
+                // we will check to make sure the whole word is letters
+                // if it's not, isWord becomes false and we don't worry about the word
+                for (int j = 0; j < words.length; j++) {
+                    words[j] = justAlphaChars(words[j]);
+                    System.out.println(words[j]);
+                    wordBank.insert(words[j], 3);
+
+                }
+            }
+            iterator++;
         }
-        }
-        // if the word has only letters, we insert it into the trie
-        // If the word is already in the trie, it'll increase the weight
-        // if not, it'll add it with a weight of 1
-        if (isWord) {
-        wordBank.insert(words[j], 3);
-        }
-        }
-        }
-        iterator++;
-        }
+        /*
          ****************DELETE THIS SECTION IF YOU DON'T USE IT**************************************************************************
          */
     }
@@ -180,6 +163,19 @@ public class SmartWord {
             previousGuesses.add(w);                                             // set previousGuesses to current guesses
         }
         return guesses;                                                         // return guesses
+    }
+
+    public static String justAlphaChars(String text) {
+
+        StringBuilder builder = new StringBuilder();
+
+        for (char ch : text.toCharArray()) {
+            if (Character.isAlphabetic(ch)) {
+                builder.append(ch);
+            }
+        }
+
+        return builder.toString();
     }
 
     // feedback on the 3 guesses from the user

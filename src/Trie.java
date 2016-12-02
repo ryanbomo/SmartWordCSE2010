@@ -24,18 +24,26 @@ public class Trie {
     public void insert(String word, int weightMod) {
         // convert to lower and set pointer to root
         String lowerWord = word.toLowerCase();
-        HashMap<Character, TrieNode> children = root.children;
+        TrieNode[] children = root.children;
         // for each letter in the word, travel down from the root
         for (int i = 0; i < lowerWord.length(); i++) {
             char c = lowerWord.charAt(i);
             TrieNode t;
+            boolean hasIt = false;
+            for(TrieNode q: children){
+                if(q!=null && q.letter == c){
+                    hasIt = true;
+                }
+            }
             // if the children have the node, go to it
-            if (children.containsKey(c)) {
-                t = children.get(c);
+            if (hasIt) {
+                t = children[c-'a'];
             } else {
                 // if the children don't have the node, create it
                 t = new TrieNode(c);
-                children.put(c, t);
+                //System.out.println(c-'a');
+                //System.out.println("This is the line for: "+c);
+                children[c-'a']=t;
             }
             // point to children
             children = t.children;
@@ -56,14 +64,20 @@ public class Trie {
     public TrieNode searchNode(String str) {
         String lowerWord = str.toLowerCase();
         // create a map of the children starting at the root
-        Map<Character, TrieNode> children = root.children;
+        TrieNode[] children = root.children;
         TrieNode t = null;
         // read through the children until you find the bottom of the word
         // or you find a mismatch
         for (int i = 0; i < lowerWord.length(); i++) {
             char c = lowerWord.charAt(i);
-            if (children.containsKey(c)) {
-                t = children.get(c);
+            boolean hasIt = false;
+            for(TrieNode q: children){
+                if(q!=null && q.letter == c){
+                    hasIt = true;
+                }
+            }
+            if (hasIt) {
+                t = children[c-'a'];
                 children = t.children;
             } else {
                 // couldn't find word
@@ -129,10 +143,12 @@ public class Trie {
     // and puts the stored word into the priority queue with the weight as the key
     public void recursiveHeapBuild(TrieNode t) {
         // if t has children, call recursiveHeapBuild on each child
-        if (!t.children.isEmpty()) {
-            for (Map.Entry<Character, TrieNode> entry : t.children.entrySet()) {
-                TrieNode c = entry.getValue();
+        if (t.hasChildren()) {
+            for (TrieNode entry : t.children) {
+                TrieNode c = entry;
+                if(c!=null){
                 recursiveHeapBuild(c);
+                }
             }
         }
         // if t has weight, add word and weight to heap
