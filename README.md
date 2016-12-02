@@ -94,17 +94,23 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
 
 
 ## Results - Initial Submission
+
+####v0.4 - Improved punctuation handling - Currently at Accuracy ~48.5
+
+Realized that my handling of punctuation was kind of dumb.  Fixed it so that rather than tossing out the word, the offending character is tossed instead (well replaced with "").
+
+  - Hilary:
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_hilary_5.png?raw=true)
+
+  - Trump:
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_5.png?raw=true)
+
+
 ####v0.3.1 - We now remember previous guesses for a word - Currently at Accuracy ~48.25
 
 Changed previous guess storage from array size 3 to an Array List.  This avoids corner cases of long words switching between two sets of incorrect previous guesses
 
-  - New Hilary Results
-
-![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_hilary_4.png?raw=true)
-
-  - New Trump Results
-
-![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_4.png?raw=true)
+Screenshots available in screenshot folder.
 
 ####v0.3 - We now remember previous guesses for a word - Currently at Accuracy ~48
 
@@ -116,7 +122,7 @@ Screenshots available in screenshot folder.
 
 This allows us to reward good guesses and punish bad guesses.
 
-Screen shots available in screenshot folder.
+Screenshots available in screenshot folder.
 
 ####v0.1 - Original Implementation Results - Accuracy ~45.5
 
