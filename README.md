@@ -100,9 +100,11 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
 Realized that my handling of punctuation was kind of dumb.  Fixed it so that rather than tossing out the word, the offending character is tossed instead (well replaced with "").
 
   - Hilary:
+
 ![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_hilary_5.png?raw=true)
 
   - Trump:
+
 ![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_5.png?raw=true)
 
 
