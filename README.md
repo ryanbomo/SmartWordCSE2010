@@ -95,17 +95,24 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
 
 ## Results - Initial Submission
 
+####v0.5 - Switched from HashMaps/Maps to Arrays and Array Lists, Improved Puncutation Handling- Currently at Accuracy ~48.5
+
+This was mostly for space improvement.  By switching to arrays, our size is down about 16-20mb, not a huge improvement but it helps.  Also found that things like @ and u with umlaut, were cuasing issues in our old handling of punctuation.
+
+Hilary -
+
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_hilary_6.png?raw=true)
+
+Trump - 
+
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_6.png?raw=true)
+
+
 ####v0.4 - Improved punctuation handling - Currently at Accuracy ~48.5
 
 Realized that my handling of punctuation was kind of dumb.  Fixed it so that rather than tossing out the word, the offending character is tossed instead (well replaced with "").
 
-  - Hilary:
-
-![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_hilary_5.png?raw=true)
-
-  - Trump:
-
-![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_5.png?raw=true)
+Screenshots available in screenshot folder.
 
 
 ####v0.3.1 - We now remember previous guesses for a word - Currently at Accuracy ~48.25
