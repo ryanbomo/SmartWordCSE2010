@@ -75,10 +75,10 @@ public class SmartWord {
     // put weights at top for quick changes to try
     // and find best configuration
     int dictionaryWeight = 2;
-    int priorWeight = 15;
-    int goodGuess = 25;
-    int missedGuess = 20;
-    int badGuess = 0;
+    int priorWeight = 5;
+    int goodGuess =  10;
+    int missedGuess = 10;
+    int badGuess = -1;
 
     // initialize SmartWord with a file of English words
     public SmartWord(String wordFile) throws IOException {

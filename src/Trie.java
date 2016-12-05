@@ -30,20 +30,20 @@ public class Trie {
             char c = lowerWord.charAt(i);
             TrieNode t;
             boolean hasIt = false;
-            for(TrieNode q: children){
-                if(q!=null && q.letter == c){
+            for (TrieNode q : children) {
+                if (q != null && q.letter == c) {
                     hasIt = true;
                 }
             }
             // if the children have the node, go to it
             if (hasIt) {
-                t = children[c-'a'];
+                t = children[c - 'a'];
             } else {
                 // if the children don't have the node, create it
                 t = new TrieNode(c);
                 //System.out.println(c-'a');
                 //System.out.println("This is the line for: "+c);
-                children[c-'a']=t;
+                children[c - 'a'] = t;
             }
             // point to children
             children = t.children;
@@ -56,6 +56,7 @@ public class Trie {
             if (i == lowerWord.length() - 1) {
                 t.weight = t.weight + weightMod;
                 t.word = lowerWord;
+                t.isEnd = true;
             }
         }
     }
@@ -71,13 +72,13 @@ public class Trie {
         for (int i = 0; i < lowerWord.length(); i++) {
             char c = lowerWord.charAt(i);
             boolean hasIt = false;
-            for(TrieNode q: children){
-                if(q!=null && q.letter == c){
+            for (TrieNode q : children) {
+                if (q != null && q.letter == c) {
                     hasIt = true;
                 }
             }
             if (hasIt) {
-                t = children[c-'a'];
+                t = children[c - 'a'];
                 children = t.children;
             } else {
                 // couldn't find word
@@ -146,8 +147,8 @@ public class Trie {
         if (t.hasChildren()) {
             for (TrieNode entry : t.children) {
                 TrieNode c = entry;
-                if(c!=null){
-                recursiveHeapBuild(c);
+                if (c != null) {
+                    recursiveHeapBuild(c);
                 }
             }
         }

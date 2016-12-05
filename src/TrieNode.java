@@ -10,13 +10,16 @@ public class TrieNode {
     // character of the trie
     char letter;
     
-    // HashMap containing children
+    // array containing children
     TrieNode[] children = new TrieNode[26];
     
     // weight of word, to be used only on end characters
     int weight = 0;
     // string of word, to be used only on end characters
     String word;
+    
+    // boolean marker for end of word
+    boolean isEnd = false;
     
     public TrieNode() {
     }
@@ -35,4 +38,15 @@ public class TrieNode {
         
         return hasChildren;
     }
+    
+    public int numChildren(){
+        int numChild = 0;
+        for(TrieNode t: children){
+            if(t!=null){
+                numChild++;
+            }
+        }
+        return numChild;
+    }
+
 }
