@@ -91,7 +91,38 @@ Goal for final Product
 #### Test Cases
 We tested using the clinton and trump txt files provided by the teacher.  I will create a few more test files of my own out of essays I typed in undergrad.
 
+## Results - Final Submission
 
+####v1.0 - Final Version - Accuracy ~48.5
+
+Submitted v0.5 as the final version, making it version 1.0.  There were no changes from v0.5 to v1.0, just versioning due to final release.
+
+Hilary - 
+
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_hilary_final.png?raw=true)
+
+Trump -
+
+![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_final.png?raw=true)
+
+## Changes to Initial Submission
+
+####Insert can now use variable weights for inserting a word
+Our initial submission had insert add 1 to the words weight every time it was inserted.  However, we needed a way to supress bad guesses from popping back up.  So now, insert caries a weight and this is added to the weight at the node with the last letter of the word.  
+
+This means that we can initialize the words from the dictionary at a set value, and then reward successes more and punish misses less.  Currently values are initialized at 2 per dictionary insert, 1 per prior user insert, 10 per successful find insert, 10 per non-successfuly word terminating insert and -1 for bad guess insert.
+
+While these numbers may seem arbitrary, there is some logic.  We want to allow each word some amoun of buffer for bad guesses, so we initialize the words a bit higher than the baseline.  We want our prior history to matter, but not as much as what is currently being written.  Finally, for our current writes, whether a word is guessed correctly or not, the correct word is given +4 to its weight.  Bad guesses punish a bit, with a -1.  Currently the punishing behavior isn't quite working, but will be updated shortly.
+
+I am going to create a script to try a bunch of permutations of these values and see if a clearly superior configuration comes out of it. - Ryan
+
+Words can only be lowered to 1, so as to keep them distinct from non-word terminating nodes.  We need words to remain guessable, just less likely each time they are incorrect.
+
+####Better Handling of Punctuation/Non-Letter Characters
+Our initial submission ignored any word with non-letter characters.  The final submission drops the character instead.
+
+####Better Missed Guess Handling
+With the addition of weights, we can also now remember old bad guesses for a word.  If a word is guessed incorrectly, it is added to an array list and not guessed for the current word again.
 
 ## Results - Initial Submission
 
@@ -99,13 +130,7 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
 
 This was mostly for space improvement.  By switching to arrays, our size is down about 16-20mb, not a huge improvement but it helps.  Also found that things like @ and u with umlaut, were cuasing issues in our old handling of punctuation.
 
-Hilary -
-
-![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_hilary_6.png?raw=true)
-
-Trump - 
-
-![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_6.png?raw=true)
+Screenshots available in screenshot folder.
 
 
 ####v0.4 - Improved punctuation handling - Currently at Accuracy ~48.5
@@ -144,19 +169,5 @@ Screenshots available in screenshot folder.
 ![Alt text](https://github.com/ryanbomo/SmartWordCSE2010/blob/master/screenshots/test_trump_1.png?raw=true)
 
 
-## Changes to Initial Submission
 
-####Insert can now use variable weights for inserting a word
-Our initial submission had insert add 1 to the words weight every time it was inserted.  However, we needed a way to supress bad guesses from popping back up.  So now, insert caries a weight and this is added to the weight at the node with the last letter of the word.  
 
-This means that we can initialize the words from the dictionary at a set value, and then reward successes more and punish misses less.  Currently values are initialized at 2 per dictionary insert, 1 per prior user insert, 10 per successful find insert, 10 per non-successfuly word terminating insert and -1 for bad guess insert.
-
-While these numbers may seem arbitrary, there is some logic.  We want to allow each word some amoun of buffer for bad guesses, so we initialize the words a bit higher than the baseline.  We want our prior history to matter, but not as much as what is currently being written.  Finally, for our current writes, whether a word is guessed correctly or not, the correct word is given +4 to its weight.  Bad guesses punish a bit, with a -1.  Currently the punishing behavior isn't quite working, but will be updated shortly.
-
-I am going to create a script to try a bunch of permutations of these values and see if a clearly superior configuration comes out of it. - Ryan
-
-Words can only be lowered to 1, so as to keep them distinct from non-word terminating nodes.  We need words to remain guessable, just less likely each time they are incorrect.
-
-## Results - Final Submission
-
-TBA
