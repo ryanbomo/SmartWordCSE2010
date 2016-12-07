@@ -18,9 +18,6 @@ public class TrieNode {
     // string of word, to be used only on end characters
     String word;
     
-    // boolean marker for end of word
-    boolean isEnd = false;
-    
     public TrieNode() {
     }
     

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class Trie {
 
+    int num;
+    int totalNodes;
     private TrieNode root;
     HeapPriorityQueue wordRankings;
 
@@ -56,7 +58,6 @@ public class Trie {
             if (i == lowerWord.length() - 1) {
                 t.weight = t.weight + weightMod;
                 t.word = lowerWord;
-                t.isEnd = true;
             }
         }
     }
