@@ -58,7 +58,7 @@ Goal for final Product
 
 ## Implementation
 
-####Description of the overall algorithm:
+#### Description of the overall algorithm:
 
 1. Grab word list and build trie from the word list [Done in SmartWord]
   1. These words are then inserted into the Trie
@@ -93,7 +93,7 @@ We tested using the clinton and trump txt files provided by the teacher.  I will
 
 ## Results - Final Submission
 
-####v1.0 - Final Version - Accuracy ~48.5
+#### v1.0 - Final Version - Accuracy ~48.5
 
 Submitted v0.5 as the final version, making it version 1.0.  There were no changes from v0.5 to v1.0, just versioning due to final release.
 
@@ -107,7 +107,7 @@ Trump -
 
 ## Changes to Initial Submission
 
-####Insert can now use variable weights for inserting a word
+#### Insert can now use variable weights for inserting a word
 Our initial submission had insert add 1 to the words weight every time it was inserted.  However, we needed a way to supress bad guesses from popping back up.  So now, insert caries a weight and this is added to the weight at the node with the last letter of the word.  
 
 This means that we can initialize the words from the dictionary at a set value, and then reward successes more and punish misses less.  Currently values are initialized at 2 per dictionary insert, 1 per prior user insert, 10 per successful find insert, 10 per non-successfuly word terminating insert and -1 for bad guess insert.
@@ -118,47 +118,47 @@ I am going to create a script to try a bunch of permutations of these values and
 
 Words can only be lowered to 1, so as to keep them distinct from non-word terminating nodes.  We need words to remain guessable, just less likely each time they are incorrect.
 
-####Better Handling of Punctuation/Non-Letter Characters
+#### Better Handling of Punctuation/Non-Letter Characters
 Our initial submission ignored any word with non-letter characters.  The final submission drops the character instead.
 
-####Better Missed Guess Handling
+#### Better Missed Guess Handling
 With the addition of weights, we can also now remember old bad guesses for a word.  If a word is guessed incorrectly, it is added to an array list and not guessed for the current word again.
 
 ## Results - Initial Submission
 
-####v0.5 - Switched from HashMaps/Maps to Arrays and Array Lists, Improved Puncutation Handling- Currently at Accuracy ~48.5
+#### v0.5 - Switched from HashMaps/Maps to Arrays and Array Lists, Improved Puncutation Handling- Currently at Accuracy ~48.5
 
 This was mostly for space improvement.  By switching to arrays, our size is down about 16-20mb, not a huge improvement but it helps.  Also found that things like @ and u with umlaut, were cuasing issues in our old handling of punctuation.
 
 Screenshots available in screenshot folder.
 
 
-####v0.4 - Improved punctuation handling - Currently at Accuracy ~48.5
+#### v0.4 - Improved punctuation handling - Currently at Accuracy ~48.5
 
 Realized that my handling of punctuation was kind of dumb.  Fixed it so that rather than tossing out the word, the offending character is tossed instead (well replaced with "").
 
 Screenshots available in screenshot folder.
 
 
-####v0.3.1 - We now remember previous guesses for a word - Currently at Accuracy ~48.25
+#### v0.3.1 - We now remember previous guesses for a word - Currently at Accuracy ~48.25
 
 Changed previous guess storage from array size 3 to an Array List.  This avoids corner cases of long words switching between two sets of incorrect previous guesses
 
 Screenshots available in screenshot folder.
 
-####v0.3 - We now remember previous guesses for a word - Currently at Accuracy ~48
+#### v0.3 - We now remember previous guesses for a word - Currently at Accuracy ~48
 
 Cuts down the number of bad guesses by a good chunk
 
 Screenshots available in screenshot folder.
 
-####v0.2 - Insert can now use variable weights for inserting a word - Accuracy ~46
+#### v0.2 - Insert can now use variable weights for inserting a word - Accuracy ~46
 
 This allows us to reward good guesses and punish bad guesses.
 
 Screenshots available in screenshot folder.
 
-####v0.1 - Original Implementation Results - Accuracy ~45.5
+#### v0.1 - Original Implementation Results - Accuracy ~45.5
 
 - Here are our initial results with the Clinton txt files.
 
